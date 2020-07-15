@@ -4,32 +4,31 @@ import { useAppContext } from "../../../contexts/app";
 
 // import { Container } from './styles';
 
-function ItemList(drone) {
+function ItemList({ drone }) {
   return (
     <li>
       <h3>{`Drone ${drone.id_drone}`}</h3>
-      <p>{`latitude ${drone.latitude}`}</p>
-      <p>{`longitude ${drone.longitude}`}</p>
-      <p>{`temperatura ${drone.temperatura}`}</p>
-      <p>{`umidade ${drone.id_drone}`}</p>
-      <p>{`rastrear ${drone.id_drone}`}</p>
+      <p>{`latitude: ${drone.latitude}`}</p>
+      <p>{`longitude: ${drone.longitude}`}</p>
+      <p>{`temperatura: ${drone.temperatura}`}</p>
+      <p>{`umidade: ${drone.umidade}`}</p>
+      <p>{`rastrear: ${drone.rastrear}`}</p>
     </li>
   );
 }
 
 function ListDrones() {
-  const [drones, setDrone] = useAppContext();
+  const { drones, addNewDrone } = useAppContext();
 
   function handleAddDrone() {
-    const newDrone = {
+    addNewDrone({
       id_drone: drones.length + 1,
-      latitude: 0,
-      longitude: 0,
-      temperatura: 0,
-      umidade: 0,
+      latitude: -23.5634612,
+      longitude: -46.6331563,
+      temperatura: "25°C",
+      umidade: "90%",
       rastrear: false,
-    };
-    setDrone([...drones, newDrone]);
+    });
   }
 
   return (
@@ -40,7 +39,7 @@ function ListDrones() {
       <br />
       <ul>
         {drones.map((drone) => {
-          return <ItemList drone={drone} />;
+          return <ItemList key={drone.id_drone} drone={drone} />;
         })}
       </ul>
       <Link to="/">Voltar</Link>

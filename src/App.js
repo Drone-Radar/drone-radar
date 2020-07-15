@@ -1,13 +1,12 @@
 import React from "react";
 import "./App.css";
 import Routes from "./routes";
-import Timer from "./components/timer";
+
 import { AppProvider } from "./contexts/app";
 
 function App() {
   return (
     <AppProvider>
-      <Timer />
       <Routes />
     </AppProvider>
 

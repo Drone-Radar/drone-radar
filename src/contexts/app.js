@@ -1,21 +1,22 @@
 import React, { createContext, useContext, useState } from "react";
 
-// import { Container } from './styles';
-
 const AppContext = createContext({});
 
 export const AppProvider = ({ children }) => {
-  const [drones, setDrone] = useState([]);
+  const [drones, setDrones] = useState([]);
+
+  function addNewDrone(drone) {
+    setDrones((current) => [...current, drone]);
+  }
 
   return (
-    <AppContext.Provider value={{ drones, setDrone }}>
+    <AppContext.Provider value={{ drones, addNewDrone }}>
       {children}
     </AppContext.Provider>
   );
 };
 
 export function useAppContext() {
-  debugger;
   return useContext(AppContext);
 }
 
