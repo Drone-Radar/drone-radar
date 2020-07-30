@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getDrones } from "../../services/getDrones";
-function Timer(props) {
+import './style.css';
+
+export default function Timer(props) {
   const [segundo, setSegundo] = useState(10);
   const [ativo, setAtivo] = useState(true);
   const [texto, setTexto] = useState("");
@@ -13,15 +15,15 @@ function Timer(props) {
         setSegundo(segundo - 1);
       }, 1000);
       setTexto(
-        `Atualizando dados em ${segundo} segundo${segundo <= 1 ? "" : "s"}...`
+        `Atualizando em ${segundo} segundo${segundo <= 1 ? "" : "s"}...`
       );
     } else {
       clearInterval(intervalo);
       setSegundo(10);
-      setTexto("Atualização de dados desativado");
+      setTexto(" Atualização de dados desativada");
     }
 
-    if (segundo === 0) setTexto("Atualizando dados...");
+    if (segundo === 0) setTexto("Atualizando...");
 
     if (segundo < 0) {
       //TODO: Enviar mensagem para RabbitMQ
@@ -44,13 +46,13 @@ function Timer(props) {
     return () => clearInterval(intervalo);
   }, [ativo, props.state, segundo]);
 
-  const textoBotao = `${ativo ? "Desativar" : "Ativar"} envio de dados`;
+  const textoBotao = `${ativo ? "Desativar" : "Ativar"}`;
   return (
-    <>
+    <div className="timer-container">
       <button onClick={() => setAtivo(!ativo)}>{textoBotao}</button>
-      <p>{texto}</p>
-    </>
+      <header>
+        <h1>{texto}</h1>
+      </header>
+    </div>
   );
 }
-
-export default Timer;

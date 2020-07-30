@@ -1,0 +1,30 @@
+.timer-container  {
+  max-width: 1180px;
+  padding: 0 30px;
+  margin: 32px auto;
+}
+
+.timer-container header {
+  display: flex;
+  align-items: center;
+}
+
+.timer-container header button {
+  height: 80px;
+  width: 100px;
+  border-radius:  4px;
+  border: 1px solid #ff9020;
+  background: #ff9020;
+  margin-left: 20px;
+  transition: border-color 0.10s; 
+    
+}
+
+.timer-container header button:hover {
+  border-color: #ff9020;
+}
+
+.timer-container h1 {
+  margin-top:  80px;
+  margin-bottom: 24px;
+}
