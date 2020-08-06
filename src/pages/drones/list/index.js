@@ -47,14 +47,14 @@ export default function ListDrones() {
         }
     }
 
-  
 
-  return (   
+
+  return (
   <div className="list-container">
     <header>
       <span>Lista de Drones</span>
-      <button onClick={handleAddDrone} type="button"> Adicionar drone </button>                
-      
+      <button onClick={handleAddDrone} type="button"> Adicionar drone </button>
+
       <button onClick = {handleLogout}
           type="button">
           <FiPower size={16} color = "#ffff"/>
@@ -68,19 +68,18 @@ export default function ListDrones() {
     {drones.map(drone => (
       <li key={drone.id_drone}>
       <ItemList key={drone.id_drone} drone={drone} />;
-      
+
       <button onClick={() => handleDeleteDrone('1')} type="button">
         <FiTrash2 size = {20} color="#a8a8b3"/>
-      </button>  
+      </button>
 
       <Link className="back-link" to="/mapa">
-        <FiArrowRight size={20} color="#F28500" />                        
-      </Link>      
-      </li>      
+        <FiArrowRight size={20} color="#F28500" />
+      </Link>
+      </li>
     ))}
 
     </ul>
   </div>
   );
 }
- 

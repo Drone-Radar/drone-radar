@@ -10,6 +10,11 @@ export default function Home() {
     history.push('/drones/list');
   }
 
+  function handleInputDrone(){
+    localStorage.clear();
+    history.push('/drones/input');
+  }
+
   function handleMapa(){
     localStorage.clear();
     history.push('/mapa');
@@ -19,7 +24,9 @@ export default function Home() {
       <div className="content">
         <header>
           <h1> Selecione uma opção </h1>
-          <button onClick={handleDrone} type="button">Drones</button>
+          <button onClick={handleDrone} type="button"> Lista de Drones</button>
+          <br />
+          <button onClick={handleInputDrone} type="button">Cadastrar Drone</button>
           <br />
           <button onClick={handleMapa} type="button">Mapa</ button>
         </header>
@@ -28,4 +35,4 @@ export default function Home() {
   );
 }
 
- 
+
