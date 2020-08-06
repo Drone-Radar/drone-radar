@@ -18,7 +18,7 @@
 }
 
 .mapa-container header img {
-  height: 64px; 
+  height: 64px;
 }
 
 .mapa-container header a {
@@ -34,8 +34,8 @@
   border: 1px solid #ff9020;
   background: #ff9020;
   margin-left: 20px;
-  transition: border-color 0.10s; 
-    
+  transition: border-color 0.10s;
+
 }
 
 .mapa-container header button:hover {
@@ -55,7 +55,7 @@
 }
 
 .mapa-container ul li{
-  background: #FFF;
+  background: #737380;
   padding: 24px;
   border-radius: 8px;
   position: relative;
@@ -76,7 +76,7 @@
 .mapa-container ul li strong {
   display: block;
   margin-bottom: 16px;
-  color: #41414d;
+  color: #737380
 
 }
 

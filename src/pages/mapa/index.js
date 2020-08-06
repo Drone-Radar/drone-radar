@@ -103,8 +103,8 @@ export default function Mapa() {
 
         <button onClick = {handleLogout}
           type="button">
-          <AiFillBackward size={15} color = "#ffff"/>
-        </button>  
+          <AiFillBackward size={15} color = "#41414d"/>
+        </button>
       </header>
     </div>
   );

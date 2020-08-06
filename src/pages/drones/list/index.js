@@ -39,16 +39,6 @@ export default function ListDrones() {
     });
   };
 
-  async function handleDeleteDrone(IDrone){
-        try{
-            console.log("drone deletado");
-        } catch (err){
-            alert('Ero ao deletar drone, tente novamente');
-        }
-    }
-
-
-
   return (
   <div className="list-container">
     <header>
@@ -57,7 +47,7 @@ export default function ListDrones() {
 
       <button onClick = {handleLogout}
           type="button">
-          <FiPower size={16} color = "#ffff"/>
+          <FiPower size={16} color = "#312e38"/>
       </button>
     </header>
 
@@ -69,12 +59,8 @@ export default function ListDrones() {
       <li key={drone.id_drone}>
       <ItemList key={drone.id_drone} drone={drone} />;
 
-      <button onClick={() => handleDeleteDrone('1')} type="button">
-        <FiTrash2 size = {20} color="#a8a8b3"/>
-      </button>
-
       <Link className="back-link" to="/mapa">
-        <FiArrowRight size={20} color="#F28500" />
+        <FiArrowRight size={30} color="#F28500" />
       </Link>
       </li>
     ))}
