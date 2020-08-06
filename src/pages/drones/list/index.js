@@ -1,27 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import { useAppContext } from "../../../contexts/app";
-import { FiPower, FiTrash2, FiArrowRight } from 'react-icons/fi'
+import { FiPower, FiTrash2, FiArrowRight } from 'react-icons/fi';
+import api from '../../../services/api';
 
 
 import './style.css';
 
 export default function ListDrones() {
-  function ItemList({ drone }) {
-    return (
-      <li>
-        <h3>{`Drone ${drone.id_drone}`}</h3>
-        <p>{`latitude: ${drone.latitude}`}</p>
-        <p>{`longitude: ${drone.longitude}`}</p>
-        <p>{`temperatura: ${drone.temperatura}`}</p>
-        <p>{`umidade: ${drone.umidade}`}</p>
-        <p>{`rastrear: ${drone.rastrear}`}</p>
-      </li>
-    );
-  }
 
-  const { drones, addNewDrone } = useAppContext();
+  const [drones, setDrones] = useState([]);
   const history = useHistory();
+
+  useEffect(() => {
+    api.get('drones',{
+    }).then(res => {
+        const data = res.data;
+        setDrones(data);
+        console.log(res.data);
+    });
+}, []);
 
   function handleLogout(){
     localStorage.clear();
@@ -29,15 +27,19 @@ export default function ListDrones() {
   }
 
   function handleAddDrone() {
-    addNewDrone({
-      id_drone: drones.length + 1,
-      latitude: -23.5634612,
-      longitude: -46.6331563,
-      temperatura: "25°C",
-      umidade: "90%",
-      rastrear: false,
-    });
+    localStorage.clear();
+    history.push('/drones/input');
   };
+
+  async function handleDeleteDrone(nomeDrone){
+    try{
+        await api.delete(`drones/${nomeDrone}`);
+        setDrones(drones.filter(drone => drone.name !== nomeDrone))
+
+    } catch (err){
+        alert('Ero ao deletar Drone, tente novamente');
+    }
+}
 
   return (
   <div className="list-container">
@@ -51,20 +53,35 @@ export default function ListDrones() {
       </button>
     </header>
 
-    <h1>Total de Drones: {drones.length}</h1>
+  <h1>Total de Drones: {drones.length}</h1>
 
     <ul>
+    {drones && drones.map(drone => (
+      <li key={drone.id}>
+          <strong>NOME:</strong>
+          <p>{drone.name}</p>
 
-    {drones.map(drone => (
-      <li key={drone.id_drone}>
-      <ItemList key={drone.id_drone} drone={drone} />;
+          <strong>LATITUDE:</strong>
+          <p>{drone.latitude}</p>
 
-      <Link className="back-link" to="/mapa">
-        <FiArrowRight size={30} color="#F28500" />
-      </Link>
+          <strong>LONGITUDE:</strong>
+          <p>{drone.longitude}</p>
+
+          <strong>TEMPRATURA:</strong>
+          <p>{drone.humidity}</p>
+
+          <strong>RASTREAR:</strong>
+          <p>{drone.tracking == true ? 'sim' : 'não'}</p>
+
+          <button onClick={() => handleDeleteDrone(drone.name)} type="button">
+              <FiTrash2 size = {20} color="#ff9020" />
+          </button>
+
+          <Link className="back-link" to="/mapa">
+            <FiArrowRight size={30} color="#F28500" />
+          </Link>
       </li>
-    ))}
-
+      ))}
     </ul>
   </div>
   );
