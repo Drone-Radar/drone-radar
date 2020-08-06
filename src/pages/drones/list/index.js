@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
-import { useAppContext } from "../../../contexts/app";
 import { FiPower, FiTrash2, FiArrowRight } from 'react-icons/fi';
 import api from '../../../services/api';
 
@@ -67,7 +66,7 @@ export default function ListDrones() {
           <strong>TEMPRATURA:</strong>
           <p>{drone.humidity}</p>
           <strong>RASTREAR:</strong>
-          <p>{drone.tracking == true ? 'sim' : 'não'}</p>
+          <p>{drone.tracking === true ? 'sim' : 'não'}</p>
 
           <button onClick={() => handleDeleteDrone(drone.name)} type="button">
               <FiTrash2 size = {20} color="#ff9020" />

@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { AiFillBackward } from 'react-icons/ai'
 import {
   GoogleMap,
@@ -97,7 +97,7 @@ export default function Mapa() {
               onCloseClick={() => setSelected(null)}
             >
               <div>
-                <h2>Drone encontrado</h2>
+                <h2>Drone encontrado: {selected.name}</h2>
                 <p>Temperatura:{selected.temp}</p>
                 <p>Umidade: {selected.umi}</p>
               </div>

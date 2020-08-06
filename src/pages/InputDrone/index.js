@@ -32,7 +32,7 @@ export default function InputDrone() {
       console.log(data);
 
     try {
-      const res = await api.post('drones', data);
+      await api.post('drones', data);
       alert(`Drone cadastrado com sucesso`);
       history.push('/drones/list');
     }
