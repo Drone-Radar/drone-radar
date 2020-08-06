@@ -60,16 +60,12 @@ export default function ListDrones() {
       <li key={drone.id}>
           <strong>NOME:</strong>
           <p>{drone.name}</p>
-
           <strong>LATITUDE:</strong>
           <p>{drone.latitude}</p>
-
           <strong>LONGITUDE:</strong>
           <p>{drone.longitude}</p>
-
           <strong>TEMPRATURA:</strong>
           <p>{drone.humidity}</p>
-
           <strong>RASTREAR:</strong>
           <p>{drone.tracking == true ? 'sim' : 'não'}</p>
 

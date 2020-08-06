@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getDrones } from "../../services/getDrones";
+import api from '../../services/api'
 import './style.css';
 
 export default function Timer(props) {
@@ -29,8 +29,10 @@ export default function Timer(props) {
       //TODO: Enviar mensagem para RabbitMQ
       //TODO: Atualizar mapa de drones
 
-      getDrones().then((data) => {
-        const droneMarkers = data.map((drone) => {
+
+      api.get('drones',{
+      }).then(res => {
+        const droneMarkers = res.data.map((drone) => {
           return {
             id: drone.id_drone,
             lat: drone.latitude,

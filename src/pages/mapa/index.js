@@ -11,7 +11,7 @@ import mapStyles from "./mapStyles";
 import './style.css';
 
 import Timer from "../../components/timer";
-import { getDrones } from "../../services/getDrones";
+import api from '../../services/api';
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -34,12 +34,16 @@ export default function Mapa() {
   const history = useHistory();
 
   useEffect(() => {
-    getDrones().then((data) => {
-      const droneMarkers = data.map((drone) => {
+    api.get('drones',{
+    }).then(res => {
+      const droneMarkers = res.data.map((drone) => {
         return {
-          id: drone.id_drone,
+          id: drone.id,
+          name: drone.name,
           lat: drone.latitude,
           lng: drone.longitude,
+          umi: drone.humidity,
+          temp: drone.temperature,
         };
       });
       setMarkers(droneMarkers);
@@ -94,8 +98,8 @@ export default function Mapa() {
             >
               <div>
                 <h2>Drone encontrado</h2>
-                <p>Temperatura: 25ºC</p>
-                <p>Umidade: 90%</p>
+                <p>Temperatura:{selected.temp}</p>
+                <p>Umidade: {selected.umi}</p>
               </div>
             </InfoWindow>
           ) : null}
