@@ -9,10 +9,11 @@ import './style.css'
 
 export default function InputDrone() {
 
-  const [latitude, setLatitude] = useState('');
-  const [longitude, setLongitude] = useState('');
-  const [temperatura, setTemperatura] = useState('');
-  const [umidade, setUmidade] = useState('');
+  const [nameDrone, setNameDrone] = useState('');
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
+  const [temperatura, setTemperatura] = useState(0);
+  const [umidade, setUmidade] = useState(0);
   const [rastrear, setRastrear] = useState(true);
 
   const history = useHistory();
@@ -20,10 +21,18 @@ export default function InputDrone() {
   async function handleRegister(event) {
     event.preventDefault();
 
-    const data = { latitude, longitude, temperatura, umidade, rastrear };
+    const data = {
+      name: nameDrone,
+      latitude: latitude,
+      longitude: longitude,
+      temperature: temperatura,
+      humidity: umidade,
+      tracking: rastrear
+    };
+      console.log(data);
 
     try {
-      //const res = await api.post('ErrorOcurrence', data);
+      const res = await api.post('drones', data);
       alert(`Drone cadastrado com sucesso`);
       history.push('/drones/list');
     }
@@ -31,8 +40,6 @@ export default function InputDrone() {
       alert(err.response.data)
     }
   }
-
-
   return (
     <div className="register-container">
       <div className="content">
@@ -44,42 +51,49 @@ export default function InputDrone() {
         </section>
         <form onSubmit={handleRegister}>
 
+
+          <Input
+            name="name"
+            label="Nome Drone"
+            value={nameDrone}
+            onChange={(e) => {setNameDrone(e.target.value)}}
+          />
           <Input
             name="latitude"
             label="Latitude"
-            value="-6423432"
+            value={latitude}
             onChange={(e) => {setLatitude(e.target.value)}}
           />
 
           <Input
             name="longitude"
             label="Longitude"
-            value="-6787686"
+            value={longitude}
             onChange={(e) => {setLongitude(e.target.value)}}
           />
 
           <Input
             name="temperatura"
             label="Temperatura"
-            value="46"
+            value={temperatura}
             onChange={(e) => {setTemperatura(e.target.value)}}
           />
 
           <Input
             name="umidade"
             label="Umidade"
-            value="25%"
+            value={umidade}
             onChange={(e) => {setUmidade(e.target.value)}}
           />
 
           <Select
             name="rastrear"
             label="Rastrear"
-            value={0}
+            value={rastrear}
             onChange={e => {setRastrear(e.target.value)}}
             options={[
-              { value: 0, label: 'Sim'},
-              { value: 1, label: 'Não'},
+              { value: true, label: 'Sim'},
+              { value: false, label: 'Não'},
             ]}
           />
           <button className="button" type="submit">
