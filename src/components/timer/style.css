@@ -1,7 +1,11 @@
-.timer-container  {
+.timer-container {
   max-width: 1180px;
   padding: 0 30px;
   margin: 32px auto;
+  float: left;
+}
+.timer-container div {
+  min-width: 300px;
 }
 
 .timer-container header {
@@ -12,12 +16,11 @@
 .timer-container header button {
   height: 80px;
   width: 100px;
-  border-radius:  4px;
+  border-radius: 4px;
   border: 1px solid #ff9020;
   background: #ff9020;
   margin-left: 20px;
-  transition: border-color 0.10s; 
-    
+  transition: border-color 0.1s;
 }
 
 .timer-container header button:hover {
@@ -25,6 +28,6 @@
 }
 
 .timer-container h1 {
-  margin-top:  80px;
+  margin-top: 80px;
   margin-bottom: 24px;
 }

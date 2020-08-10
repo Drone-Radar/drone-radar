@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import api from '../../services/api'
-import './style.css';
+import api from "../../services/api";
+import "./style.css";
 
 export default function Timer(props) {
   const [segundo, setSegundo] = useState(10);
@@ -28,19 +28,21 @@ export default function Timer(props) {
     if (segundo < 0) {
       //TODO: Enviar mensagem para RabbitMQ
       //TODO: Atualizar mapa de drones
+      props.state.getDrones();
+      // api.get("drones", {}).then((res) => {
+      //   const markers = res.data.map((drone) => {
+      //     return {
+      //       id: drone._id,
+      //       name: drone.name,
+      //       lat: drone.latitude,
+      //       lng: drone.longitude,
+      //       umi: drone.humidity,
+      //       temp: drone.temperature,
+      //     };
+      //   });
 
-
-      api.get('drones',{
-      }).then(res => {
-        const droneMarkers = res.data.map((drone) => {
-          return {
-            id: drone.id_drone,
-            lat: drone.latitude,
-            lng: drone.longitude,
-          };
-        });
-        props.state.setMarkers(droneMarkers);
-      });
+      //   props.state.setMarkers(markers);
+      // });
 
       setSegundo(10);
     }
@@ -52,9 +54,7 @@ export default function Timer(props) {
   return (
     <div className="timer-container">
       <button onClick={() => setAtivo(!ativo)}>{textoBotao}</button>
-      <header>
-        <h1>{texto}</h1>
-      </header>
+      <h1>{texto}</h1>
     </div>
   );
 }
