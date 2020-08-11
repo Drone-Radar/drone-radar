@@ -1,68 +1,93 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Execução do Projeto Completo 
 
-## Available Scripts
+## `Back-End`
 
-In the project directory, you can run:
+### Requirementos
+```
+node, npm
+```
 
-### `yarn start`
+### Instalação e  Execução
+git clone https://github.com/Drone-Radar/drone-api <p>
+npm install <p>
+npm start <p>
+acessar http://localhost:3333/ <p> 
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Validação da Fila (RabbitMQ)
+Foi criada as chaves no .env do projeto (necessário configuração prórpia) <p> 
+CLOUDAMQP_URL=amqp://rjzblehl:4iOzb8P7ZU1noxGZ9LM2S4IEvYNTuWJn@orangutan.rmq.cloudamqp.com/rjzblehl <p> 
+CLOUDAMQP_HEARTBEAT=60 <p>
+CLOUDAMQP_EXCHANGE=drone <p> 
+CLOUDAMQP_QUEUE=comunicado <p>
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `yarn test`
+## `Front-End`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Requirementos
+```
+node, npm
+```
 
-### `yarn build`
+### Instalação e  Execução
+git clone https://github.com/Drone-Radar/drone-radar <p>
+npm install <p>
+npm start <p>
+acessar http://localhost:3000/ <p> 
+** executar com o back-end executando em paralelo ** 
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## `Execução das Notificações`
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Acessando Mailtrap.io:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+O Mailtrap fornece um servidor SMTP falso para sua equipe de desenvolvimento testar, visualizar e compartilhar e-mails enviados dos ambientes de pré-produção e testar com dados reais sem o risco de spam de clientes reais. É criado pela Railsware e para muitas tarefas de desenvolvimento, o uso do Mailtrap será gratuito.
 
-### `yarn eject`
+Essencialmente, você se inscreve no Mailtrap e envia todo o seu e-mail de ambiente de pré-produção através do seu servidor Falso Mailtrap SMTP.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**URL: https://mailtrap.io/**
+* Crie o Cadastro (Possível utilizar o Github);
+* Após o login crie uma inbox com o nome: drones;
+* Ao acessar a inbox terá na tela principal as credenciais, se atente apenas na questão de usuário e senha e altere o arquivo **.env**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Run:
+```
+npm run 
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+** Executar com o Back-End executando em paralelo ** 
+- No arquivo **app.js** existirá o método **setInterval(validateData, (60000));** responsável pela execução de toda a atividade.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+Caso utilize o projeto UI, segue a sugestão de dados para teste da aplicação:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```
+[Não deve entrar]
+Nome:Drone01
+Latitude:0
+Longitude:100
+Temperatura:35
+Umidade:15
+[Entrar - Temperatura > 35]
+Nome:Drone02
+Latitude:0
+Longitude:100
+Temperatura:36
+Umidade:16
+[Entrar - Temperatura < 0]
+Nome:Drone03
+Latitude:0
+Longitude:100
+Temperatura:-20
+Umidade:16
+[Entrar - Umidade < 0]
+Nome:Drone04
+Latitude:0
+Longitude:100
+Temperatura:35
+Umidade:14a
+[Entrar - Todos os critérios]
+Drone05
+Latitude:0
+Longitude:100
+Temperatura:36
+Umidade:14
+```
